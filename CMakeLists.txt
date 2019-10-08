@@ -4,9 +4,8 @@ message(">>>>>>>>>>>>>>> ThingJS core included <<<<<<<<<<<<<<<<<<<")
 set(COMPONENT_LIB thingjs_core)
 
 idf_component_register(
-        SRC_DIRS "./"
         INCLUDE_DIRS  "./"
-        REQUIRES spiffs nvs_flash mdns spi_flash partition_table bootloader_support app_update esp_adc_cal thingjs_front
+        REQUIRES spiffs nvs_flash mdns spi_flash partition_table bootloader_support app_update esp_adc_cal
 )
 
 execute_process(COMMAND  git rev-parse HEAD
