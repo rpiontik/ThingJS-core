@@ -6,6 +6,7 @@ set(COMPONENT_LIB thingjs_core)
 idf_component_register(
         INCLUDE_DIRS  "./"
         REQUIRES spiffs nvs_flash mdns spi_flash partition_table bootloader_support app_update esp_adc_cal
+        PRIV_REQUIRES thingjs_front
 )
 
 execute_process(COMMAND  git rev-parse HEAD
