@@ -3,6 +3,7 @@ message(">>>>>>>>>>>>>>> ThingJS core included <<<<<<<<<<<<<<<<<<<")
 
 set(COMPONENT_LIB thingjs_core)
 
+
 idf_component_register(
         INCLUDE_DIRS  "./"
         REQUIRES spiffs nvs_flash mdns spi_flash partition_table bootloader_support app_update esp_adc_cal
@@ -19,7 +20,7 @@ execute_process(COMMAND  date "+%D %X"
         RESULT_VARIABLE VERSION_MOMENT)
 idf_build_set_property(COMPILE_OPTIONS "-DVERSION_MOMENT=\"${VERSION_MOMENT}\"" APPEND)
 
-idf_build_set_property(COMPILE_OPTIONS "-L${CMAKE_SOURCE_DIR}/components/thingjs_core/libthingjs_core.a" APPEND)
+target_link_libraries(${COMPONENT_LIB} INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/${target}libthingjs_core.a")
 
 
 
