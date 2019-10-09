@@ -1,13 +1,15 @@
 # Project body
 message(">>>>>>>>>>>>>>> ThingJS core included <<<<<<<<<<<<<<<<<<<")
 
-set(COMPONENT_LIB thingjs_core)
+#set(COMPONENT_LIB thingjs_core)
 
 idf_component_register(
+        SRC_DIRS "./"
         INCLUDE_DIRS  "./"
-        REQUIRES spiffs nvs_flash mdns spi_flash partition_table bootloader_support app_update esp_adc_cal
-        PRIV_REQUIRES thingjs_front
+        REQUIRES spiffs nvs_flash mdns spi_flash partition_table bootloader_support app_update esp_adc_cal thingjs_front
 )
+
+link_libraries(thingjs_core_lib)
 
 execute_process(COMMAND  git rev-parse HEAD
         WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
@@ -33,6 +35,9 @@ idf_build_set_property(COMPILE_OPTIONS "-DMG_NET_IF_LWIP_LOW_LEVEL=3" APPEND)
 idf_build_set_property(COMPILE_OPTIONS "-DMG_SSL_IF_SIMPLELINK=3" APPEND)
 idf_build_set_property(COMPILE_OPTIONS "-DMG_ENABLE_HTTP_STREAMING_MULTIPART=1" APPEND)
 
+#component_compile_options(INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/${target}libthingjs_core.a")
+
 #set(project_elf ${CMAKE_PROJECT_NAME}.elf)
+#add_library(${COMPONENT_LIB}_lib STATIC ${CMAKE_CURRENT_SOURCE_DIR}/${target}libthingjs_core.a)
 
 target_link_libraries(${COMPONENT_LIB} INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/${target}libthingjs_core.a")
