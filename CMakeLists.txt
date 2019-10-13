@@ -6,9 +6,14 @@ idf_component_register(
         REQUIRES spiffs nvs_flash mdns spi_flash partition_table bootloader_support app_update esp_adc_cal thingjs_front
 )
 
+if(NOT ${target})
+    set(target "thingjs_core/")
+endif()
+
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/${target}")
 link_directories("${CMAKE_CURRENT_SOURCE_DIR}/${target}")
 
+#message("TARGET thing_core_lib PROPERTY IMPORTED_LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/${target}libthingjs_core.a")
 add_library(thing_core_lib STATIC IMPORTED)
 set_property(TARGET thing_core_lib PROPERTY IMPORTED_LOCATION "${CMAKE_CURRENT_SOURCE_DIR}/${target}libthingjs_core.a")
 target_link_libraries(${COMPONENT_LIB} INTERFACE thing_core_lib)
