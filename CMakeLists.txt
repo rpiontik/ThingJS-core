@@ -13,14 +13,22 @@ endif()
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/${target}")
 link_directories("${CMAKE_CURRENT_SOURCE_DIR}/${target}")
 
-#message("TARGET thing_core_lib PROPERTY IMPORTED_LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/${target}libthingjs_core.a")
 add_library(thing_core_lib STATIC IMPORTED)
 set_property(TARGET thing_core_lib PROPERTY IMPORTED_LOCATION "${CMAKE_CURRENT_SOURCE_DIR}/${target}libthingjs_core.a")
 target_link_libraries(${COMPONENT_LIB} INTERFACE thing_core_lib)
-target_link_libraries(thing_core_lib INTERFACE __idf_cxx)
-target_link_libraries(thing_core_lib INTERFACE __idf_thingjs_front)
-target_link_libraries(thing_core_lib INTERFACE __idf_spiffs)
-target_link_libraries(thing_core_lib INTERFACE __idf_mdns)
+
+set_property(TARGET thing_core_lib APPEND PROPERTY LINK_LIBRARIES __idf_cxx)
+set_property(TARGET thing_core_lib APPEND PROPERTY INTERFACE_LINK_LIBRARIES $<LINK_ONLY:__idf_cxx>)
+
+set_property(TARGET thing_core_lib APPEND PROPERTY LINK_LIBRARIES __idf_spiffs)
+set_property(TARGET thing_core_lib APPEND PROPERTY INTERFACE_LINK_LIBRARIES $<LINK_ONLY:__idf_spiffs>)
+
+set_property(TARGET thing_core_lib APPEND PROPERTY LINK_LIBRARIES __idf_mdns)
+set_property(TARGET thing_core_lib APPEND PROPERTY INTERFACE_LINK_LIBRARIES $<LINK_ONLY:__idf_mdns>)
+
+set_property(TARGET thing_core_lib APPEND PROPERTY LINK_LIBRARIES __idf_thingjs_front)
+set_property(TARGET thing_core_lib APPEND PROPERTY INTERFACE_LINK_LIBRARIES $<LINK_ONLY:__idf_thingjs_front>)
+
 
 execute_process(COMMAND  git rev-parse HEAD
         WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
