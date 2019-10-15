@@ -3,7 +3,7 @@ message(">>>>>>>>>>>>>>> ThingJS core included <<<<<<<<<<<<<<<<<<<")
 
 idf_component_register(
         INCLUDE_DIRS  "./"
-        REQUIRES spiffs nvs_flash mdns spi_flash partition_table bootloader_support app_update esp_adc_cal thingjs_front
+        REQUIRES spiffs nvs_flash mdns spi_flash partition_table bootloader_support app_update esp_adc_cal thingjs_front json
 )
 
 if(NOT ${target})
@@ -26,8 +26,14 @@ set_property(TARGET thing_core_lib APPEND PROPERTY INTERFACE_LINK_LIBRARIES $<LI
 set_property(TARGET thing_core_lib APPEND PROPERTY LINK_LIBRARIES __idf_mdns)
 set_property(TARGET thing_core_lib APPEND PROPERTY INTERFACE_LINK_LIBRARIES $<LINK_ONLY:__idf_mdns>)
 
+set_property(TARGET thing_core_lib APPEND PROPERTY LINK_LIBRARIES __idf_json)
+set_property(TARGET thing_core_lib APPEND PROPERTY INTERFACE_LINK_LIBRARIES $<LINK_ONLY:__idf_json>)
+
 set_property(TARGET thing_core_lib APPEND PROPERTY LINK_LIBRARIES __idf_thingjs_front)
 set_property(TARGET thing_core_lib APPEND PROPERTY INTERFACE_LINK_LIBRARIES $<LINK_ONLY:__idf_thingjs_front>)
+
+set_property(TARGET thing_core_lib APPEND PROPERTY LINK_LIBRARIES __idf_thingjs_boards)
+set_property(TARGET thing_core_lib APPEND PROPERTY INTERFACE_LINK_LIBRARIES $<LINK_ONLY:__idf_thingjs_boards>)
 
 
 execute_process(COMMAND  git rev-parse HEAD
