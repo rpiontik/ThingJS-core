@@ -35,6 +35,9 @@ set_property(TARGET thing_core_lib APPEND PROPERTY INTERFACE_LINK_LIBRARIES $<LI
 set_property(TARGET thing_core_lib APPEND PROPERTY LINK_LIBRARIES __idf_thingjs_boards)
 set_property(TARGET thing_core_lib APPEND PROPERTY INTERFACE_LINK_LIBRARIES $<LINK_ONLY:__idf_thingjs_boards>)
 
+set_property(TARGET thing_core_lib APPEND PROPERTY LINK_LIBRARIES __idf_thingjs_extern)
+set_property(TARGET thing_core_lib APPEND PROPERTY INTERFACE_LINK_LIBRARIES $<LINK_ONLY:__idf_thingjs_extern>)
+
 
 execute_process(COMMAND  git rev-parse HEAD
         WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
