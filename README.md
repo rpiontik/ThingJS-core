@@ -5,6 +5,7 @@ The core module of ThingsJS open source IoT platform.
 git submodule add git@github.com:rpiontik/ThingJS-core.git components/thingjs_core
 
 # Requirements
+* ESP-IDF version: release/v4.0
 * ThingJS-front (https://github.com/rpiontik/ThingJS-front)
 * ThingJS-extern (https://github.com/rpiontik/ThingJS-extern)
 * ThingJS-boards (https://github.com/rpiontik/ThingsJS-boards)
