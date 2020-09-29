@@ -46,7 +46,7 @@ void thingjsRegisterInterface(const struct st_thingjs_interface_manifest * inter
 typedef mjs_val_t (*SyncCallbackFunction)(struct mjs * context, void * data);
 
 //Send request to mJS process for run callback function in sync mode
-void thingjsSendCallbackRequest(TaskHandle_t process, SyncCallbackFunction func, void * data);
+BaseType_t thingjsSendCallbackRequest(TaskHandle_t process, SyncCallbackFunction func, void * data);
 
 //Return true is time is actual else false
 //Result = actual time with offset
